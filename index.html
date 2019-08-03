@@ -84,110 +84,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JDBC学习笔记"><a href="#JDBC学习笔记" class="headerlink" title="JDBC学习笔记"></a><font color="orange"><center>JDBC学习笔记</center></font><center></center></h1><h4 id="数据库连接的各个对象"><a href="#数据库连接的各个对象" class="headerlink" title="数据库连接的各个对象"></a>数据库连接的各个对象</h4><ul>
-<li><p>DriverManager:驱动管理对象 </p>
-<ul>
-<li><strong>注册驱动</strong>: DriverManager.registerDiver(Driver driver); </li>
-<li><strong>获取数据库连接</strong>:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection connector = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/xby?serverTimezone=GMT&quot;,&quot;root&quot;,&quot;xby123456&quot;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Connection:数据库连接对象</p>
-<ul>
-<li>获取执行sql语句的对象:<ul>
-<li>Statement createStatement(String sql);</li>
-<li>PreparedStatement prepareStatement(String sql);</li>
-</ul>
-</li>
-<li>管理事务<ul>
-<li>开启事务: void setAutoCommit(boolean autoCommit); 调用该方法,若设置参数为false,即设置手动提交开启事务.</li>
-<li>提交事务: void commit();</li>
-<li>回滚事务: void rollback();</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Statement:执行sql语句对象</p>
-<ul>
-<li>boolean execute(String sql);执行任意的sql语句</li>
-<li>int executeUpdate(String sql);执行DML,DDL语句,返回一个整数代表sql语句影响数据库的行数</li>
-<li>ResultSet executeQuery(String sql);执行DQL语句</li>
-</ul>
-</li>
-<li><p>ResultSet:结果集对象</p>
-<ul>
-<li>boolean next():游标向下移动一行,判断当前行是否是最后一行末尾,如果是,则返回false</li>
-<li>getXXX(参数):获取数据,参数代表列的序号</li>
-</ul>
-</li>
-</ul>
-<p>JDBC获取数据库连接的步骤<br>-<br><strong>1.注册驱动:  Class.forname(“驱动地址”);</strong></p>
-<p><strong>2.获取数据库连接对象:Connection</strong> <strong>coon=DriverManager.getConnection(数据库url地址,数据库用户名,数据库用户密码);</strong></p>
-<p>(此时已经获取到了数据库的连接对象)</p>
-<p><strong>3.使用数据库连接对象获取执行sql语句的对象:Statement</strong> <strong>sta=coon.createStatement();</strong></p>
-<p><strong>4.写好sql语句并使用获取到的执行sql语句对象执行sql语句:sta.execute();</strong></p>
-<h4 id="数据库的查询遍历"><a href="#数据库的查询遍历" class="headerlink" title="数据库的查询遍历"></a>数据库的查询遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import java.sql.*;</span><br><span class="line"></span><br><span class="line">class abc</span><br><span class="line">&#123;</span><br><span class="line">     public static void main(String[] args)</span><br><span class="line">     &#123;</span><br><span class="line">         Connection connector = null;</span><br><span class="line">         Statement str= null;</span><br><span class="line">         int num = 0;</span><br><span class="line">         try &#123;</span><br><span class="line">             Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span><br><span class="line">             connector = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/xby?serverTimezone=GMT&quot;,&quot;root&quot;,&quot;xby123456&quot;);</span><br><span class="line">             String sql=&quot;select  *from money&quot;;</span><br><span class="line">             str = connector.createStatement();</span><br><span class="line">             ResultSet res = str.executeQuery(sql);</span><br><span class="line">             while(res.next())</span><br><span class="line">             &#123;</span><br><span class="line">                 System.out.println(&quot;id:&quot;+res.getInt(1)+&quot; name:&quot;+res.getString(2)+&quot; balance &quot;+res.getInt(3));</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         catch (ClassNotFoundException e)</span><br><span class="line">         &#123;</span><br><span class="line">             e.printStackTrace();</span><br><span class="line">         &#125; catch (SQLException e)</span><br><span class="line">         &#123;</span><br><span class="line">             e.printStackTrace();</span><br><span class="line">         &#125; finally</span><br><span class="line">         &#123;</span><br><span class="line">             try &#123;</span><br><span class="line">                 str.close();</span><br><span class="line">                 connector.close();</span><br><span class="line">             &#125; catch (SQLException e) &#123;</span><br><span class="line">                 e.printStackTrace();</span><br><span class="line">             &#125;</span><br><span class="line">             System.out.println(num+&quot; lines are infuluced&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>PreparedStatement:执行sql对象,与Statement不同的是,PreparedStatement是预处理对象,安全性更高.<ul>
-<li>新建PreparedStatement对象时要将sql语句作为参数传进去,sql语句中也要使用占位符,然后再设置占位符对应的数据,再进行执行</li>
-</ul>
-</li>
-</ul>
-<h3 id="事务的操作"><a href="#事务的操作" class="headerlink" title="事务的操作"></a>事务的操作</h3><p>1.事务的开启:conn.setAutoCommit(false);<br>传入的参数为false,关闭自动提交,此时就开启了事务.</p>
-<p>2.事务的提交:conn.commit();</p>
-<p>3.事务的回滚:conn.rollback();</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">     &#123;</span><br><span class="line">         Connection connector=null;</span><br><span class="line">         String sql1=&quot;update money set balance=balance+? where id = ?&quot;;</span><br><span class="line">         String sql2=&quot;update money set balance=balance-? where id = ?&quot;;</span><br><span class="line">         PreparedStatement pre1= null;</span><br><span class="line">         PreparedStatement pre2=null;</span><br><span class="line">         try &#123;</span><br><span class="line">             connector= JDBCUtils.getConnection(&quot;jdbc:mysql://localhost:3306/xby?serverTimezone=GMT&quot;,&quot;root&quot;,&quot;xby123456&quot;);</span><br><span class="line">             connector.setAutoCommit(false);</span><br><span class="line">             pre1=connector.prepareStatement(sql1);</span><br><span class="line">             pre2=connector.prepareStatement(sql2);</span><br><span class="line">             pre1.setInt(1,500);</span><br><span class="line">             pre1.setInt(2,1);</span><br><span class="line">             pre2.setInt(1,500);</span><br><span class="line">             pre2.setInt(2,2);</span><br><span class="line">             int num1= pre1.executeUpdate();</span><br><span class="line">             int num2 = pre2.executeUpdate();</span><br><span class="line">             int num=num1+num2;</span><br><span class="line">             System.out.println(num+&quot; lines are influenced&quot;);</span><br><span class="line">             connector.commit();</span><br><span class="line">         &#125;</span><br><span class="line">         catch (SQLException e)</span><br><span class="line">         &#123;</span><br><span class="line">             try &#123;</span><br><span class="line">                 connector.rollback();</span><br><span class="line">             &#125; catch (SQLException e1) &#123;</span><br><span class="line">                 e1.printStackTrace();</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         finally &#123;</span><br><span class="line">             try &#123;</span><br><span class="line">                 connector.close();</span><br><span class="line">             &#125; catch (SQLException e) &#123;</span><br><span class="line">                 e.printStackTrace();</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>数据库连接池:</strong> </p>
-<p>每次获取连接时申请资源很耗时,用容器将获取好的连接存起来,访问时,从连接池中获取连接,用完后再还回去,这种操作十分高效.</p>
-<p>c3p0<br>-</p>
-<p><strong>1:导包</strong></p>
-<p>导入c3p0.jar,  mchange-commons.jar和mysql的jar包.</p>
-<p><strong>2.配置文件</strong></p>
-<p>配置文件 c3p0-config.xml</p>
-<p><strong>3.代码</strong></p>
-<p>通过ComboPooledDataSource()来创建DataSource对象.</p>
-<p>DataSource()相当于连接源,每次获取连接,都通过DataSource()来获取.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">   &#123;</span><br><span class="line">       DataSource ds = new ComboPooledDataSource();</span><br><span class="line">       System.out.println(&quot;hello wrold&quot;);</span><br><span class="line">       for (int i = 1; i &lt;=5 ; i++) &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               Connection connector = ds.getConnection();</span><br><span class="line">               System.out.println(i+&quot;:&quot;+connector.toString());</span><br><span class="line">           &#125; catch (SQLException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>德鲁伊Druid<br>-<br><strong>1.导包</strong></p>
-<p>导入druid.jar 与 mysql的jar包即可</p>
-<p><strong>2.配置文</strong>件</p>
-<p>配置文件名为 druid.properties</p>
-<p><strong>3.代码</strong></p>
-<p>在druid中,连接源DataSource变成通过DruidDataSourceFactory的createDataSource()方法来创建.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">    &#123;</span><br><span class="line">        Properties pro=new Properties();</span><br><span class="line">        InputStream in = DruidPool.class.getClassLoader().getResourceAsStream(&quot;druid.properties&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            pro.load(in);</span><br><span class="line">            DataSource ds= DruidDataSourceFactory.createDataSource(pro);</span><br><span class="line">            Connection con=ds.getConnection();</span><br><span class="line">            System.out.println(con);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>Template<br>-<br><strong>1.导包</strong></p>
-<p>导入Template的五个jar包</p>
-<p><strong>2.获取DataSource对象</strong></p>
-<p>通过数据库连接池获取DataSource对象</p>
-<p><strong>3.获取JdbcTemplate对象</strong></p>
-<p>通过JdbcTemplate传入DataSource来获取JdbcTemplate对象</p>
-<p><strong>4.代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">    &#123;</span><br><span class="line">    JdbcTemplate template=new JdbcTemplate(DruidUtils.getSource());</span><br><span class="line">    String sql=&quot;select * from money&quot;;</span><br><span class="line">        List&lt;Map&lt;String, Object&gt;&gt; maps = template.queryForList(sql);</span><br><span class="line">        for(Map map:maps)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println( map);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>JdbcTemplate的方法<br>-<br>1.template.update()</p>
-<p>执行sql语句,返回一个整数,代表sql语句影响数据库的行数</p>
-<p>2.template.queryForMap()</p>
-<p>执行sql的查语句,返回一个Map类型的集合,集合中列名最为key,查询到的值作为value,一一对应.该方法只能查询一行数据</p>
-<p>3.template,queryForList()</p>
-<p>执行查语句,可以查多行数据,返回的是一个List集合,集合中装的是每一行数据封装的Map集合.</p>
-<p>4.template.query()</p>
-<p>将查询到的数据封装成一个对象.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">  &#123;</span><br><span class="line">  JdbcTemplate template=new JdbcTemplate(DruidUtils.getSource());</span><br><span class="line">  String sql=&quot;select * from money&quot;;</span><br><span class="line">      List&lt;person&gt; personList = template.query(sql, new BeanPropertyRowMapper&lt;person&gt;(person.class));</span><br><span class="line">      for(person p:personList)</span><br><span class="line">      &#123;</span><br><span class="line">          System.out.println(p);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>5.template.queryForObject()</p>
-<p>执行查询,将结果封装成指定的对象.</p>
-<p>template.queryForObject(sql,想要封装的对象.class)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">  &#123;</span><br><span class="line">  JdbcTemplate template=new JdbcTemplate(DruidUtils.getSource());</span><br><span class="line">  String sql=&quot;select count(id) from money&quot;;</span><br><span class="line">      Integer num = template.queryForObject(sql, Integer.class);</span><br><span class="line">      System.out.println(num);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h1 id="JDBC学习笔记"><a href="#JDBC学习笔记" class="headerlink" title="JDBC学习笔记"></a><font color="orange"><center>JDBC学习笔记</center></font><center></center></h1>
+        
+          <p class="article-more-link">
+            <a href="/2019/08/03/test/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/03/test/" data-id="cjyv6t4q600011orxsnne2sr0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/03/test/" data-id="cjyv98evv000114rxzyf6pdqn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -236,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/03/hello-world/" data-id="cjyv6t4ps00001orxyykxifwd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/03/hello-world/" data-id="cjyv98evf000014rx7yown2ck" class="article-share-link">Share</a>
       
       
     </footer>
