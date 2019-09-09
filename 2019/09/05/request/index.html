@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Sukidesyo&#39;s Blog">
 <meta property="og:description" content="服务器与客户端交流">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-05T12:52:06.770Z">
+<meta property="og:updated_time" content="2019-09-09T08:42:00.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="request&amp;response">
 <meta name="twitter:description" content="服务器与客户端交流">
@@ -568,6 +568,51 @@ ServletRequest被HttpServletRequest继承,再由org.apache.catalina.connector.Re
 <p>步骤2. 输出数据.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ServletOutputStream os = response.getOutputStream();</span><br><span class="line">os.write();</span><br></pre></td></tr></table></figure>
 
+<h3 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h3><p>代表整个web应用，可以和程序的容器(服务器)来通信</p>
+<ul>
+<li><p>获取：</p>
+<ul>
+<li>通过request对象获取<ul>
+<li>request.getServletContext();</li>
+</ul>
+</li>
+<li>通过HttpServlet获取<ul>
+<li>this.getServletContext();</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>功能：</p>
+<ul>
+<li><p>获取MIME类型：String getMimeType(String file)  </p>
+<ul>
+<li>MIME类型:在互联网通信过程中定义的一种文件数据类型<ul>
+<li>格式： 大类型/小类型   text/html        image/jpeg</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>域对象：共享数据</p>
+<ul>
+<li>setAttribute(String name,Object value)</li>
+<li>getAttribute(String name)</li>
+<li>removeAttribute(String name)</li>
+</ul>
+</li>
+<li><p>ServletContext对象范围：所有用户所有请求的数据</p>
+</li>
+</ul>
+</li>
+<li><p>获取文件的真实(服务器)路径</p>
+<ol>
+<li><p>方法：String getRealPath(String path)  </p>
+<p>String b = context.getRealPath(“/b.txt”);//web目录下资源访问<br>System.out.println(b);</p>
+<p>String c = context.getRealPath(“/WEB-INF/c.txt”);//WEB-INF目录下的资源访问<br>System.out.println(c);</p>
+<p>String a = context.getRealPath(“/WEB-INF/classes/a.txt”);//src目录下的资源访问<br>System.out.println(a);</p>
+</li>
+</ol>
+</li>
+</ul>
 
       
     </div>
@@ -725,7 +770,7 @@ ServletRequest被HttpServletRequest继承,再由org.apache.catalina.connector.Re
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Request"><span class="nav-number">1.</span> <span class="nav-text">Request</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#request方法-以下方法通过request调用"><span class="nav-number">1.0.1.</span> <span class="nav-text">request方法(以下方法通过request调用)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取请求参数的通用方式"><span class="nav-number">1.0.2.</span> <span class="nav-text">获取请求参数的通用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求转发"><span class="nav-number">1.0.3.</span> <span class="nav-text">请求转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享数据："><span class="nav-number">1.0.4.</span> <span class="nav-text">共享数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取ServletContext："><span class="nav-number">1.0.5.</span> <span class="nav-text">获取ServletContext：</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response对象"><span class="nav-number">3.</span> <span class="nav-text">Response对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">3.1.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器输出数据到浏览器"><span class="nav-number">3.2.</span> <span class="nav-text">服务器输出数据到浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出字符数据"><span class="nav-number">3.2.1.</span> <span class="nav-text">输出字符数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出字节数据"><span class="nav-number">3.2.2.</span> <span class="nav-text">输出字节数据</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Request"><span class="nav-number">1.</span> <span class="nav-text">Request</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#request方法-以下方法通过request调用"><span class="nav-number">1.0.1.</span> <span class="nav-text">request方法(以下方法通过request调用)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取请求参数的通用方式"><span class="nav-number">1.0.2.</span> <span class="nav-text">获取请求参数的通用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求转发"><span class="nav-number">1.0.3.</span> <span class="nav-text">请求转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享数据："><span class="nav-number">1.0.4.</span> <span class="nav-text">共享数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取ServletContext："><span class="nav-number">1.0.5.</span> <span class="nav-text">获取ServletContext：</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Response对象"><span class="nav-number">3.</span> <span class="nav-text">Response对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">3.1.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器输出数据到浏览器"><span class="nav-number">3.2.</span> <span class="nav-text">服务器输出数据到浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出字符数据"><span class="nav-number">3.2.1.</span> <span class="nav-text">输出字符数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出字节数据"><span class="nav-number">3.2.2.</span> <span class="nav-text">输出字节数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext"><span class="nav-number">3.3.</span> <span class="nav-text">ServletContext</span></a></li></ol></li></div>
             
 
           </div>
