@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Help">
+<meta name="description" content="Filter过滤器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/08/03/hello-world/index.html">
+<meta property="og:title" content="Filter">
+<meta property="og:url" content="http://yoursite.com/2019/09/17/Filter/index.html">
 <meta property="og:site_name" content="Sukidesyo&#39;s Blog">
-<meta property="og:description" content="Help">
+<meta property="og:description" content="Filter过滤器">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-05T12:17:58.006Z">
+<meta property="og:updated_time" content="2019-09-17T14:04:56.807Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Help">
+<meta name="twitter:title" content="Filter">
+<meta name="twitter:description" content="Filter过滤器">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/03/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/17/Filter/">
 
 
 
 
 
-  <title>Hello World | Sukidesyo's Blog</title>
+  <title>Filter | Sukidesyo's Blog</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/17/Filter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sukidesyo">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">Filter</h1>
         
 
         <div class="post-meta">
@@ -279,15 +279,11 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-            <i class="fa fa-thumb-tack"></i>
-            <font color="7D26CD">TOP</font>
-            <span class="post-meta-divider">|</span>
-              
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-03T11:39:45+08:00">
-                2019-08-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-17T22:03:54+08:00">
+                2019-09-17
               </time>
             
 
@@ -309,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hello/" itemprop="url" rel="index">
-                    <span itemprop="name">Hello</span>
+                  <a href="/categories/Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Notes</span>
                   </a>
                 </span>
 
@@ -346,21 +342,64 @@
       
 
       
-        <p>Help</p>
+        <p>Filter过滤器</p>
 <a id="more"></a>
-<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>监视器,一般用于完成通用的操作,登陆验证等.</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>web.xml配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span><br><span class="line">         version=&quot;3.1&quot;&gt;</span><br><span class="line">&lt;/web-app&gt;</span><br><span class="line">&lt;filter&gt;</span><br><span class="line">    &lt;filter-name&gt;filterDemo1&lt;/filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;Filter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;filterDemo1&lt;/filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/filterServlet&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注解配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@WebFilter(&quot;/要监视的资源路径&quot;)</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><ol>
+<li><p>定义一个类,实现Filter接口(javax.servlet.Filter)</p>
+</li>
+<li><p>复写三个方法</p>
+<ul>
+<li>doFilter()<ul>
+<li>在每次拦截资源时启用.</li>
+</ul>
+</li>
+<li>init()<ul>
+<li>在服务器启动时启用,仅执行一次,多用于加载资源.</li>
+</ul>
+</li>
+<li>destory()<ul>
+<li>服务器关闭时,启用一次.<h3 id="改变监视器的启动时机"><a href="#改变监视器的启动时机" class="headerlink" title="改变监视器的启动时机"></a>改变监视器的启动时机</h3>启动时机:</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Request:只有在直接访问时,菜启用Filter</p>
+</li>
+<li><p>ForWard:只有目标拦截资源时被转发访问的时候才启动Filter</p>
+</li>
+<li><p>多种启用时机,设置多个参数.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@WebFilter(dispatcherTypes = &#123;DispatcherType.REQUEST,DispatcherType.FORWARD&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>web.xml改变配置</li>
+</ul>
+<p>在web.xml配置文件中,在<filter-mapping>标签下设置<dispatcher>的值</dispatcher></filter-mapping></p>
+<ul>
+<li>注解配置</li>
+</ul>
+<p>在注解中,设置参数dispatcherTypes</p>
+<h3 id="过滤器的执行"><a href="#过滤器的执行" class="headerlink" title="过滤器的执行"></a>过滤器的执行</h3><p>过滤器的放行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filterChain.doFilter(servletRequest,servletResponse);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>在过滤器启动时,放行代码的上方代码执行,然后放行,资源访问完毕后,执行放行代码的下方代码.</p>
+<h3 id="过滤器链-多个配置的过滤器"><a href="#过滤器链-多个配置的过滤器" class="headerlink" title="过滤器链(多个配置的过滤器)"></a>过滤器链(多个配置的过滤器)</h3><p>在存在多个过滤器时,执行的顺序<br>过滤器A-&gt;过滤器B-&gt;执行资源-&gt;过滤器B-&gt;过滤器A</p>
+<p>过滤器先后顺序</p>
+<ol>
+<li>web.xml文件中,定义在上面的过滤器先执行</li>
+<li>注解配置中,按照类名比较,(逐位比较),较小的先执行.</li>
+</ol>
 
       
     </div>
@@ -385,15 +424,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/09/05/request/" rel="next" title="request&response">
+                <i class="fa fa-chevron-left"></i> request&response
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/03/JDBC/" rel="prev" title="JDBC学习笔记">
-                JDBC学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,7 +557,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter"><span class="nav-number">1.</span> <span class="nav-text">Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速入门"><span class="nav-number">1.2.</span> <span class="nav-text">快速入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变监视器的启动时机"><span class="nav-number">1.3.</span> <span class="nav-text">改变监视器的启动时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器的执行"><span class="nav-number">1.4.</span> <span class="nav-text">过滤器的执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器链-多个配置的过滤器"><span class="nav-number">1.5.</span> <span class="nav-text">过滤器链(多个配置的过滤器)</span></a></li></ol></li></ol></div>
             
 
           </div>
